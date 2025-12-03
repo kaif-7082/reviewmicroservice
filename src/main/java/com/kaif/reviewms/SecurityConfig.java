@@ -1,6 +1,6 @@
 package com.kaif.reviewms;
 
-// Make sure to import the reviewms.jwt classes
+
 import com.kaif.reviewms.jwt.AuthEntryPointJwt;
 import com.kaif.reviewms.jwt.AuthTokenFilter;
 

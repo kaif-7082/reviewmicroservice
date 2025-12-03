@@ -6,6 +6,7 @@ import com.kaif.reviewms.review.clients.CompanyClient;
 import com.kaif.reviewms.review.dto.ReviewRequestDto;
 import com.kaif.reviewms.review.dto.ReviewResponseDto;
 import com.kaif.reviewms.review.exceptions.CompanyNotFoundException;
+import com.kaif.reviewms.review.messaging.ReviewMessageProducer;
 import feign.FeignException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,8 @@ class ReviewServiceImplementationTest {
     @InjectMocks
     private ReviewServiceImplementation reviewService;
 
+    @Mock
+    private ReviewMessageProducer reviewMessageProducer;
     // --- TEST 1: Create Review (Success) ---
     @Test
     void testCreateReview_Success() {

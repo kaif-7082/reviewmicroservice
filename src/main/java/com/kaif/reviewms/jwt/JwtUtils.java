@@ -35,23 +35,8 @@ public class JwtUtils {
         return null;
     }
 
-    public String generateToken(UserDetails userDetails) {
-        String username = userDetails.getUsername();
 
-        // 1. Get the roles
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
 
-        // 2. Build the token with roles as a "claim"
-        return Jwts.builder()
-                .subject(username)
-                .claim("roles", roles) // <-- ADD THIS LINE
-                .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key())
-                .compact();
-    }
     public String getUserNameFromJwtToken(String token) {
         return getAllClaims(token).getSubject();
     }

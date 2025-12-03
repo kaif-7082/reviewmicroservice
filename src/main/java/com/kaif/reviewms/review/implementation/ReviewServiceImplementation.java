@@ -30,16 +30,13 @@ import feign.FeignException;
 public class ReviewServiceImplementation implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-
-    @Autowired
     private CompanyClient companyClient;
-
-    @Autowired
     private ReviewMessageProducer reviewMessageProducer;
 
-    public ReviewServiceImplementation(ReviewRepository reviewRepository, CompanyClient companyClient) {
+    public ReviewServiceImplementation(ReviewRepository reviewRepository, CompanyClient companyClient,ReviewMessageProducer reviewMessageProducer) {
         this.reviewRepository = reviewRepository;
         this.companyClient = companyClient;
+        this.reviewMessageProducer = reviewMessageProducer;
     }
 
     @Override
@@ -112,7 +109,6 @@ public class ReviewServiceImplementation implements ReviewService {
         if (!review.getCompanyId().equals(reviewDto.getCompanyId())) {
             log.warn("Review {} companyId changed from {} to {}. This may require re-validation.",
                     reviewId, review.getCompanyId(), reviewDto.getCompanyId());
-            // You could add another RestTemplate call here if validation is needed on change
         }
 
         review.setTitle(reviewDto.getTitle());
@@ -178,7 +174,6 @@ public class ReviewServiceImplementation implements ReviewService {
         return avgRating;
     }
 
-    // --- Helper Mappers ---
 
     private ReviewResponseDto mapToDto(Review review) {
         ReviewResponseDto dto = new ReviewResponseDto();

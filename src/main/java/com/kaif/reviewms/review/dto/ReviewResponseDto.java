@@ -10,5 +10,4 @@ public class ReviewResponseDto {
     private String title;
     private String description;
     private double rating;
-    // We don't include companyId, as it's implied by the request
 }
